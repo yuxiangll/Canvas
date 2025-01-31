@@ -1,0 +1,30 @@
+{
+  "required": true,
+  "package": "com.s0cl.inject",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "mixin.net.minecraft.entity.player.MixinPlayerEntity",
+    "mixin.net.minecraft.network.MixinClientConnection",
+    "mixin.net.minecraft.resource.MixinNamespaceResourceManager",
+    "mixin.net.minecraft.resource.MixinReloadableResourceManagerImpl"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "accessor.net.minecraft.client.IMinecraftClient",
+    "mixin.com.mojang.blaze3d.systems.MixinRenderSystem",
+    "mixin.net.minecraft.client.MixinKeyBoard",
+    "mixin.net.minecraft.client.MixinMinecraftClient",
+    "mixin.net.minecraft.client.MixinMouse",
+    "mixin.net.minecraft.client.gui.hud.MixinIngameHud",
+    "mixin.net.minecraft.client.gui.screen.MixinSplashOverlay",
+    "mixin.net.minecraft.client.gui.screen.option.MixinLanguageOptionsScreen",
+    "mixin.net.minecraft.client.network.MixinClientPlayerEntity",
+    "mixin.net.minecraft.client.network.MixinClientPlayerInteractionManager",
+    "mixin.net.minecraft.client.render.MixinGameRenderer",
+    "mixin.net.minecraft.client.render.entity.MixinEntityRenderer",
+    "mixin.net.minecraft.client.resource.MixingDefaultClientResourcePackProvider",
+    "mixin.net.minecraft.client.util.MixinWindow"
+  ]
+}
