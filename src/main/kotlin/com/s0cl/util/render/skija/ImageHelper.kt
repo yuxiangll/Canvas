@@ -29,31 +29,35 @@ object ImageHelper {
         origin: SurfaceOrigin = SurfaceOrigin.BOTTOM_LEFT,
         alpha: Boolean = true
     ): Image {
-
-        // Bind the texture to ensure it's active
         RenderSystem.bindTexture(tex)
-
-        // Check if the cached image exists and matches the requested dimensions
-        val cachedImage = textures[tex]
-        if (cachedImage != null && cachedImage.width == width && cachedImage.height == height) {
-            return cachedImage
+        val img = textures.getOrPut(tex) {
+            Image.adoptTextureFrom(
+                context,
+                mc.framebuffer.colorAttachment,
+                GL11.GL_TEXTURE_2D,
+                width,
+                height,
+                GL11.GL_RGBA8,
+                origin,
+                if (alpha) ColorType.RGBA_8888
+                else ColorType.RGB_888X
+            )
         }
-
-        // Create a new image if the cached one doesn't exist or has mismatched dimensions
-        val newImage = Image.adoptTextureFrom(
-            context,
-            mc.framebuffer.colorAttachment,
-            GL11.GL_TEXTURE_2D,
-            width,
-            height,
-            GL11.GL_RGBA8,
-            origin,
-            if (alpha) ColorType.RGBA_8888 else ColorType.RGB_888X
-        )
-
-        // Update the cache with the new image
-        textures[tex] = newImage
-        return newImage
+        if (img.width != width || img.height != height) {
+            textures[tex] = Image.adoptTextureFrom(
+                context,
+                mc.framebuffer.colorAttachment,
+                GL11.GL_TEXTURE_2D,
+                width,
+                height,
+                GL11.GL_RGBA8,
+                origin,
+                if (alpha) ColorType.RGBA_8888
+                else ColorType.RGB_888X
+            )
+            return textures[tex]!!
+        }
+        return img
     }
 
 //    fun cropImage(image: Image, x: Int, y: Int, width: Int, height: Int): Image? {

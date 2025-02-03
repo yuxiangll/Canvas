@@ -1,8 +1,9 @@
 package com.s0cl.events
 
 import net.minecraft.client.gui.DrawContext
+import net.minecraft.client.render.Frustum
 import net.minecraft.client.render.RenderTickCounter
-import net.minecraft.client.util.tracy.TracyFrameCapturer
+import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.Entity
 import net.minecraft.entity.MovementType
 import net.minecraft.entity.player.PlayerEntity
@@ -66,5 +67,6 @@ class EventRenderEntityName(): Event()
 
 class EventRenderGameOverlay(val context: DrawContext, val renderTickCounter: RenderTickCounter): Event()
 
-class EventRenderSkija()
+class EventRenderSkija(): Event()
 
+class EventRender3D(val matrixStack: MatrixStack,val frustum: Frustum, val renderTickCounter: RenderTickCounter):Event()

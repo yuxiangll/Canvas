@@ -4,6 +4,7 @@ package com.s0cl.managers
 import com.s0cl.surveillance.EventSurveillance
 import com.s0cl.surveillance.ModuleSurveillance
 import com.s0cl.Canvas
+import com.s0cl.surveillance.RenderSurveillance
 
 
 /**
@@ -18,7 +19,7 @@ object SurveillanceManager {
     fun initialize(){
         surveillance.add(ModuleSurveillance)
         surveillance.add(EventSurveillance)
-
+        surveillance.add(RenderSurveillance)
         surveillance.forEach {
             Canvas.EventBus.subscribe(it)
         }

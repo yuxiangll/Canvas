@@ -31,6 +31,7 @@ object SkijaHelper {
             context = DirectContext.makeGL()
         }
 
+
         surface?.close()
         renderTarget?.close()
 
@@ -48,6 +49,7 @@ object SkijaHelper {
         )
 
         canvas = surface!!.canvas
+
 
     }
 

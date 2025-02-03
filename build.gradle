@@ -29,8 +29,8 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
 
-	implementation("io.github.humbleui:skija-macos-arm64:0.116.2")
-	implementation("io.github.humbleui:skija-windows-x64:0.116.2")
+	implementation("io.github.humbleui:skija-macos-arm64:0.116.3")
+	implementation("io.github.humbleui:skija-windows-x64:0.116.3")
 
 	implementation(fileTree("libs") { include("*.jar") })
 

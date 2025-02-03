@@ -3,6 +3,7 @@ package com.s0cl
 import com.s0cl.managers.CommandManager
 import com.s0cl.managers.ModuleManager
 import com.s0cl.managers.SurveillanceManager
+import com.s0cl.util.render.skija.RenderProc
 import meteordevelopment.orbit.EventBus
 import net.fabricmc.api.ModInitializer
 import org.slf4j.LoggerFactory
@@ -32,6 +33,5 @@ object Canvas : ModInitializer {
 		ModuleManager.initialize()
 		SurveillanceManager.initialize()
 		CommandManager.initialize()
-
 	}
 }

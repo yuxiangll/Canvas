@@ -1,20 +1,24 @@
 package com.s0cl.module.imp.render
 
 import com.mojang.blaze3d.systems.RenderSystem
+import com.s0cl.events.EventRenderGameOverlay
 import com.s0cl.events.EventRenderSkija
-import com.s0cl.gui.clickgui.ClickGUI
 import com.s0cl.module.Bind
 import com.s0cl.module.Category
 import com.s0cl.module.Module
+import com.s0cl.util.render.gl.render.RenderUtils
 import com.s0cl.util.render.gl.state.States
-import com.s0cl.util.render.skija.ImageHelper
-import com.s0cl.util.render.skija.SkijaHelper
+import com.s0cl.util.render.skija.*
 import io.github.humbleui.skija.ClipMode
 import io.github.humbleui.skija.FilterTileMode
 import io.github.humbleui.skija.ImageFilter
 import io.github.humbleui.skija.Paint
+import io.github.humbleui.types.RRect
 import io.github.humbleui.types.Rect
 import meteordevelopment.orbit.EventHandler
+import net.minecraft.util.hit.BlockHitResult
+import net.minecraft.util.hit.HitResult
+import net.minecraft.util.math.Box
 import org.lwjgl.glfw.GLFW
 import java.awt.Color
 
@@ -38,7 +42,6 @@ object ClickGui : Module(
     override fun onEnable() {
         if (!openned){
             openned = true
-            //TODO()
             //mc.setScreen(ClickGUI)
             //mc.setScreen(ClickScreen)
 
@@ -53,52 +56,13 @@ object ClickGui : Module(
 
     @EventHandler
     fun draw(event: EventRenderSkija){
-        run {
-            States.push()
-            RenderSystem.clearColor(0f, 0f, 0f, 0f)
-            SkijaHelper.context!!.resetGLAll()
-            val textureImage = ImageHelper.getMinecraftAsImage(
-                SkijaHelper.context!!,
-                mc.framebuffer.colorAttachment,
-                mc.framebuffer.textureWidth,
-                mc.framebuffer.textureHeight,
-                alpha = false
-            )
-            //textureImage.
+        RenderProc.SKIJA_RENDER_QUEUES.addAll(listOf(
 
-            val paint = Paint().apply {
-                imageFilter = ImageFilter.makeBlur(20f, 20f, FilterTileMode.CLAMP)
-                //color = Color(255,255,255).rgb
-            }
+            DrawBlurredRect(250f,10f,200f,200f),
 
-            val rect = Rect.makeXYWH(10f, 20f, 200f, 200f)
-            SkijaHelper.canvas!!.save()
-            SkijaHelper.canvas!!.clipRect(rect, ClipMode.INTERSECT)
-            SkijaHelper.canvas!!.drawImage(textureImage, 0f, 0f, paint)
-            SkijaHelper.canvas!!.restore()
-            SkijaHelper.surface!!.flushAndSubmit()
-            States.pop()
-        }
+            DrawRect(10f,10f,200f,200f)
 
-
-
-        run {
-            States.push()
-            RenderSystem.clearColor(0f, 0f, 0f, 0f)
-            SkijaHelper.context!!.resetGLAll()
-            val rect2 = Rect.makeXYWH(10f, 20f, 200f, 200f)
-            SkijaHelper.canvas!!.save()
-            SkijaHelper.canvas!!.drawRectShadowNoclip(rect2, -2f,-2f,4f,4f,Color(0,0,0,53).rgb)
-            SkijaHelper.canvas!!.restore()
-            SkijaHelper.surface!!.flushAndSubmit()
-            States.pop()
-        }
-
-
-
-
-
-
+        ))
     }
 
 

@@ -30,6 +30,8 @@ object ModuleManager {
         modules.add(Trigger)
         modules.add(FastPlace)
         modules.add(NoBreakCooldown)
+        modules.add(BlockRenderTest)
+        modules.add(Projectiles)
         Canvas.EventBus.subscribe(this)
     }
 
